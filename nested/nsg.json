@@ -29,6 +29,19 @@
                         }
                     },
                     {
+                        "name": "https",
+                        "properties": {
+                            "priority": 1090,
+                            "sourceAddressPrefix": "*",
+                            "protocol": "TCP",
+                            "destinationPortRange": "443",
+                            "access": "Allow",
+                            "direction": "Outbound",
+                            "sourcePortRange": "*",
+                            "destinationAddressPrefix": "*"
+                        }
+                    },
+                    {
                         "name": "http",
                         "properties": {
                             "priority": 101,
