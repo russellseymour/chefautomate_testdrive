@@ -29,11 +29,12 @@
                     "vmSize": "[parameters('computeSettings').virtualMachineSize]"
                 },
                 "storageProfile": {
-                   
+                    "imageReference": {
+                        "id": "[concat('/subscriptions/',parameters('computeSettings').customImageSubscription,'/resourceGroups/',parameters('computeSettings').customImageRG,'/providers/Microsoft.Compute/images/chefuser-image-20170615160602')]"
+                    },
                     "osDisk": {
                         "createOption": "fromImage",
                         "managedDisk": {
-                            "id": "[concat('/subscriptions/',parameters('computeSettings').customImageSubscription,'/resourceGroups/',parameters('computeSettings').customImageRG,'/providers/Microsoft.Compute/images/chefuser-image-20170615160602')]",
                             "storageAccountType": "Standard_LRS"
                         }
                     },
@@ -48,6 +49,5 @@
                 }
             }
         }
-        
     ]
 }
