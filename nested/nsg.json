@@ -29,7 +29,7 @@
                         }
                     },
                     {
-                        "name": "https",
+                        "name": "httpsout",
                         "properties": {
                             "priority": 1090,
                             "sourceAddressPrefix": "*",
