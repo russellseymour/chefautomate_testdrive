@@ -65,7 +65,7 @@ foreach ($mode in $modes) {
         $url = "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-{0}-installer.msi" -f $putty_version
 
         DownloadAndInstall -url $url
-    },
+    }
 
     "knife" {
 
