@@ -22,11 +22,11 @@ param (
 function DownloadAndInstall {
 
     [CmdletBinding()]
-    param {
+    param (
         [string]
         # URL to download package from
         $url
-    }
+    )
 
     # Define the download file
     $target = "{0}\{1}" -f $((Get-Location).Path), $(Split-Path -Leaf -Path $url)
