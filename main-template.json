@@ -2,10 +2,17 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "baseUrl": {
+            "type": "string",
+            "metadata":{
+                "description": "Base URL from which to find nested templates"
+            },
+            "defaultValue": "https://raw.githubusercontent.com/sudheermareddy/chefautomate_testdrive/master"
+        }
     },
     "variables": {
         "prefix": "[uniqueString(resourceGroup().id)]",
-        "location": "East US",
+        "location": "[resourceGroup().location]",
         "computeSettings": {
             "computeApiVersion": "2016-04-30-preview",
             "location": "[variables('location')]",
@@ -30,6 +37,7 @@
             "rubyPath": "/opt/chef-marketplace/embedded/bin/ruby",
             "chefAutoScriptUrl1": "[concat(variables('baseUrl'), '/scripts/automate_setup.rb')]",
             "chefAutoScriptUrl2": "[concat(variables('baseUrl'),'/scripts/chefupgrade_setup.sh')]",
+            "workstationSetupScriptURL": "[concat(variables('baseUrl'),'/scripts/workstation_setup.ps1')]",
             "automateLicenseUri": ""
         },
         "networkSettings": {
@@ -54,7 +62,7 @@
         "chefAutoNic": "chefauto-nic",
         "vnetId": "[resourceId('Microsoft.Network/virtualNetworks', variables('networkSettings').virtualNetworkName)]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('networkSettings').subnetName)]",
-        "baseUrl": "https://raw.githubusercontent.com/sudheermareddy/chefautomate_Testdrive/master",
+        "baseUrl": "[parameters('baseUrl')]",
         "vmsWithExtensionsURL": "[concat(variables('baseUrl'), '/nested/vm.json')]",
         "publicIPAddressesResourcesURL": "[concat(variables('baseUrl'), '/nested/pip.json')]",
         "virtualNetworksResourcesURL": "[concat(variables('baseUrl'), '/nested/vnet.json')]",

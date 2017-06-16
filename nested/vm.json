@@ -52,6 +52,30 @@
                 }
             }
         },
+
+        {
+            "apiVersion": "2015-06-15",
+            "name": "[concat(parameters('computeSettings').wsVmName, '/workstation-setup')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "[parameters('computeSettings').location]",
+            "dependsOn": [
+                "[concat('Microsoft.Compute/virtualMachines/', parameters('computeSettings').wsVmName)]"
+            ],
+            "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.8",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "fileUris": [
+                        "[parameters('computeSettings').workstationSetupScriptURL]"
+                    ]
+                },
+                "protectedSettings": {
+                    "commandToExecute": "[concat('powershell.exe -ExecutionPolicy Unrestricted -File .\\workstation_setup.ps1')]"
+                }
+            }
+        },
         {
             "type": "Microsoft.Compute/virtualMachines",
             "name": "[parameters('computeSettings').chefAutoVmName]",
